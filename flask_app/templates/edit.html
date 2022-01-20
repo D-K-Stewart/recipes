@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div style="margin-top:40px">
+        <div class="nav">
+            <div>
+                <h4>Edit Recipe</h4>
+            </div>
+            <div style="display: flex">
+                <form action="/dashboard"><button action='/new' type="submit" class="topbtn">Dashboard</button></form>
+                <form action="/logout"><button action='/logout' type="submit" class="topbtn">Logout</button></form>
+            </div>
+        </div>
+        <div class="box">
+            
+            <div class="main1">
+                <form style="display: flex" action="/recipe/{{recipe.id}}/update" method="post">
+                    <div id="new1">
+                        <label for="name">Name:</label>
+                        <input style="width:250px" type="text" name="name" id="name" value="{{recipe.name}}">
+                        {% for message in get_flashed_messages(category_filter=['error_recipe_name'])%}
+                            <p class='error'>{{message}}</p>
+                        {% endfor %}
+                        <br>
+                        <label for="desc">Description:</label>
+                        <br>
+                        <textarea type="text" name="description" id="desc" >{{recipe.description}}</textarea>
+                        {% for message in get_flashed_messages(category_filter=['error_recipe_description'])%}
+                            <p class='error'>{{message}}</p>
+                        {% endfor %}
+                        <br>
+                        <label for="inst">Instructions:</label>
+                        <br>
+                        <textarea type="text" name="instructions" id="inst">{{recipe.instructions}}</textarea>
+                        {% for message in get_flashed_messages(category_filter=['error_recipe_instructions'])%}
+                            <p class='error'>{{message}}</p>
+                        {% endfor %}
+                        <br>
+                        <button style="float: left" type="submit" value="update" class="btn">Update</button>    
+                    </div>
+                    <div id="new2">
+                    <br>
+                        <div class="col-12">
+                            <label for="name" class="md-form md-outline input-with-post-icon datepicker">Date Made On:</label>
+                            <input style="width:125px" placeholder="Select date" name="date_made_on" type="date" id="example" class="form-control">
+                            
+                            <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                            {% for message in get_flashed_messages(category_filter=['error_date'])%}
+                            <p class='error'>{{message}}</p>
+                            {% endfor %}
+                            <br>
+                            <label for="under">Under 30 Minutes?</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input name="under_min" class="form-check-input" type="radio" id="inlineCheckbox1" value="1">
+                                <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="under_min" class="form-check-input" type="radio" id="inlineCheckbox2" value="0">
+                                <label class="form-check-label" for="inlineCheckbox2">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

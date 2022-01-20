@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="nav" style="align-items:center">
+        <div>
+            <h4>Add New Recipe</h4>
+        </div>
+        <div style="display: flex">  
+            <form action="/dashboard"><button action='/new' type="submit" class="topbtn">Dashboard</button></form>
+            <form action="/logout"><button action='/logout' type="submit" class="topbtn">Logout</button></form>
+        </div>
+    </div>
+    <div class="box">
+        <div id="pagenew">
+            <!-- <h4>Edit Recipe</h4> -->
+            <form class="form" action="/create_recipe" method="post">
+                
+                <div id="new1">
+                    <label class="input1" for="name">Name:</label>
+                    <br>
+                    <input type="text" name="name" >
+                    {% for message in get_flashed_messages(category_filter=['error_recipe_name'])%}
+                        <p class='error'>{{message}}</p>
+                    {% endfor %}
+                    <br>
+                    <label class="input1" for="desc">Description:</label>
+                    <br>
+                    <textarea type="text" name="description" style="width:300px; height:100px"></textarea>
+                    {% for message in get_flashed_messages(category_filter=['error_recipe_description'])%}
+                        <p class='error'>{{message}}</p>
+                    {% endfor %}
+                    <br>
+                    <label class="input1" for="inst">Instructions:</label>
+                    <br>
+                    <textarea type="text" name="instructions" style="width:300px; height:100px"></textarea>
+                    {% for message in get_flashed_messages(category_filter=['error_recipe_instructions'])%}
+                        <p class='error'>{{message}}</p>
+                    {% endfor %}
+                    <br>
+                    <button action="/create_recipe" method='post' type="submit" class="btn">Create</button>
+                </div>
+                
+                <div id="new2">
+                    
+                    
+                    <div class="col-12">
+                        <label class="md-form md-outline input-with-post-icon datepicker">Date Made On:</label>
+                        <input placeholder="Select date" name="date_made_on" type="date" id="date" class="form-control">
+                        
+                        
+                        
+                        {% for message in get_flashed_messages(category_filter=['error_date'])%}
+                        <p class='error'>{{message}}</p>
+                        {% endfor %}
+                        <br>
+                        <label for="under">Under 30 Minutes?</label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">Yes</label>
+                            <input class="form-check-input" id="yes" name="under_min" type="radio" value="1">
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">No</label>
+                            <input class="form-check-input" name="under_min" id="no" type="radio" value="0" checked>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

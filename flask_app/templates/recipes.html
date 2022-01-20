@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div style="margin-top:40px">  
+        <div class="nav">
+            <div>
+                <p class="title">Welcome {{ user.first_name}}!</p>
+            </div>    
+            
+            <div style="display: flex">  
+                <form action="/dashboard"><button action='/new' type="submit" class="topbtn">Dashboard</button></form>
+                <form action="/logout"><button action='/logout' type="submit" class="topbtn">Logout</button></form>
+            </div>
+        </div>
+        <div class="box" style="border: solid black 1px;">
+            <div>
+                <p>{{ recipe_name }}</p>
+            </div>
+            <div>
+                <p><strong>Description:</strong> {{ recipe.description}}</p>
+                <p><strong>Under 30 minutes:</strong> {{recipe.under_min | replace (0, 'No') | replace (1, 'Yes')}}</p>
+                <p><strong>Instructions:</strong> {{ recipe.instructions}}</p>
+                <p><strong>Date Made:</strong> {{ recipe.date_made_on}}</p>
+            </div>
+
+        </div>
+
+    </div>  
+</body>
+</html>
